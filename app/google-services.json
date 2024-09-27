@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1054463700818",
+    "project_id": "condeliveryapp",
+    "storage_bucket": "condeliveryapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1054463700818:android:ad05295a7d9d9e12b3d48b",
+        "android_client_info": {
+          "package_name": "br.com.fiap.condeliveryapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDl5-n_9trp4iSlkaFBUkA-8yUbtZupRHA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
