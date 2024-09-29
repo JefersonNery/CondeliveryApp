@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
@@ -37,6 +38,7 @@ import androidx.compose.ui.input.pointer.PointerIcon
 import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
@@ -122,7 +124,7 @@ fun HomePage(
                     .width(400.dp)
                     .height(150.dp)
                     .background(color = colorResource(id = R.color.bglivery))
-                    .clip(RoundedCornerShape(70.dp)),
+                    .clip(shape = RoundedCornerShape(20.dp)),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
 
@@ -135,6 +137,7 @@ fun HomePage(
                         .width(300.dp)
                         .background(color = colorResource(id = R.color.txtlivery))
                         .clip(RoundedCornerShape(10.dp)),
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                     label = {
                         Text(text = "Digite o Codigo da entrega")
                     },
@@ -158,7 +161,7 @@ fun HomePage(
         }
 
         Text(
-            "Se necessário, você pode insirir instruções de entrega para nosso entregador abaixo :",
+            "Se necessário, você pode inserir instruções de entrega para nosso entregador no campo abaixo :",
             fontSize = 15.sp,
             modifier = Modifier
                 .width(400.dp)
@@ -178,7 +181,9 @@ fun HomePage(
             )
         )
 
-        TextButton(onClick = {
+        TextButton(
+            modifier = Modifier.offset(y = (-30.dp)),
+            onClick = {
             authViewModel.signout()
         }) {
             Text(text = "Deslogar")
