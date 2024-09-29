@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
@@ -37,6 +38,7 @@ import androidx.compose.ui.input.pointer.PointerIcon
 import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
@@ -78,7 +80,10 @@ fun HomePage(
             modifier = Modifier.height(150.dp)
         )
         Column(
-            modifier = Modifier.fillMaxWidth().offset(y = (-40.dp)), horizontalAlignment = Alignment.CenterHorizontally
+            modifier = Modifier
+                .fillMaxWidth()
+                .offset(y = (-40.dp)),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
                 "Alameda Mamoré, nº 809 - apt 513 - 6º andar",
@@ -111,30 +116,65 @@ fun HomePage(
 
             )
 
-            Image(
-                painter = painterResource(id = R.drawable.parceiros),
-                contentDescription = "Header imagem",
-                modifier = Modifier.height(80.dp)
-            )
+            Column(
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Column() {
+                    Image(
+                        painter = painterResource(id = R.drawable.parceiros),
+                        contentDescription = "Header imagem",
+                        modifier = Modifier
+                            .height(80.dp)
+                            .fillMaxWidth()
+                    )
+                }
+                Text(
+                    "Se necessário, você pode inserir instruções de entrega para nosso entregador no campo abaixo :",
+                    fontSize = 15.sp,
+                    modifier = Modifier
+                        .width(400.dp)
+                        .padding(10.dp),
+                    textAlign = TextAlign.Center
+
+                )
+
+                OutlinedTextField(
+                    value = textState.value,
+                    onValueChange = { textState.value = it },
+                    placeholder = { Text("EX: Deixe na porta, garagem etc.") },
+                    modifier = Modifier
+                        .width(400.dp)
+                        .height(130.dp),
+                    shape = RoundedCornerShape(8.dp),
+                    colors = TextFieldDefaults.outlinedTextFieldColors(
+                        focusedBorderColor = Color.Gray, unfocusedBorderColor = Color.LightGray
+                    )
+                )
+            }
+
+            Spacer(modifier = Modifier.height(30.dp))
 
             Column(
                 modifier = Modifier
                     .width(400.dp)
                     .height(150.dp)
                     .background(color = colorResource(id = R.color.bglivery))
-                    .clip(RoundedCornerShape(70.dp)),
+                    .clip(shape = RoundedCornerShape(20.dp)),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
 
             ) {
+                Spacer(modifier = Modifier.height(10.dp))
+
                 TextField(
                     value = codigo,
                     onValueChange = { codigo = it },
                     modifier = Modifier
                         .height(50.dp)
                         .width(300.dp)
-                        .background(color = colorResource(id = R.color.txtlivery))
                         .clip(RoundedCornerShape(10.dp)),
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                     label = {
                         Text(text = "Digite o Codigo da entrega")
                     },
@@ -144,9 +184,7 @@ fun HomePage(
                 Spacer(modifier = Modifier.height(10.dp))
 
                 Button(
-                    onClick = {
-                        println("Obrigado, Logo levarei seu pedido.")
-                    },
+                    onClick = {},
                     modifier = Modifier
                         .width(150.dp)
                         .height(45.dp)
@@ -157,30 +195,12 @@ fun HomePage(
             }
         }
 
-        Text(
-            "Se necessário, você pode insirir instruções de entrega para nosso entregador abaixo :",
-            fontSize = 15.sp,
-            modifier = Modifier
-                .width(400.dp)
-                .offset(y = (-50.dp)),
-            textAlign = TextAlign.Center
 
-        )
-
-        OutlinedTextField(
-            value = textState.value,
-            onValueChange = { textState.value = it },
-            placeholder = { Text("EX: Deixe na porta, garagem etc.") },
-            modifier = Modifier.width(400.dp).height(130.dp).offset(y = (-40.dp)),
-            shape = RoundedCornerShape(8.dp),
-            colors = TextFieldDefaults.outlinedTextFieldColors(
-                focusedBorderColor = Color.Gray, unfocusedBorderColor = Color.LightGray
-            )
-        )
-
-        TextButton(onClick = {
-            authViewModel.signout()
-        }) {
+        TextButton(
+            modifier = Modifier.offset(y = (-80.dp)),
+            onClick = {
+                authViewModel.signout()
+            }) {
             Text(text = "Deslogar")
         }
     }
